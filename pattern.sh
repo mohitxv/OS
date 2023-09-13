@@ -1,14 +1,13 @@
-#!/bin/sh
-#Using -d option we are checking whether the first argument is a directory or not.
-#$1 refers to the first argument
-if [ -d $1 ]
-then
-        echo "The provided argument is the directory."
-#Using -f option we are checking whether the first argument is a file or not.
-elif [ -f $1 ]
-then
-        echo "The provided argument is the file."
-#if the provided argument is not file and directory then it does not exist on the system.   
-else
-        echo "The given argument does not exist on the file system."
-fi
+
+# Iterate through each file in the current directory
+for file in *; do
+  # Check if the file is a regular file (not a directory)
+  if [ -f "$file" ]; then
+    # Use grep to search for the pattern in the file
+    if grep -q "$pattern" "$file"; then
+      echo "$file: Pattern found"
+    else
+      echo "$file: Pattern not found"
+    fi
+  fi
+done
